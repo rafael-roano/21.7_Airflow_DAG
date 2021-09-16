@@ -20,6 +20,7 @@ dag = DAG(
     default_args = default_args,
     description = "A simple DAG",      
     schedule_interval = "0 18 * * 1-5",             # Run daily, from Monday to Friday, at 06:00 PM
+    catchup=False
 )
 
 
@@ -49,7 +50,7 @@ def data_download(ticker, **kwargs):
   
     '''
 
-    start_date = dt.date.today() - dt.timedelta(days=5)        # Needs to be a weekday
+    start_date = dt.date.today() - dt.timedelta(days=1)        # Needs to be a weekday
     end_date = start_date + dt.timedelta(days=1)
     tsla_df = yf.download(ticker, start = start_date, end = end_date, interval = "1m")
 
